@@ -1,6 +1,18 @@
 <p>Hi there. The code in this repo is about a schedule app that i did, to chech the schedule to my course. I will explain in this readme all you need to know, but first things first: This code was edited to be pushed to Github. I replaced some things, like urls and other sensitive data, just for privacy and security reasons.</p>
 
-<h3>What's stripped?</h3>
+<h4>Sections</h4>
+<h6>
+<ul>
+<li><a href="#s1">What's removed?</a></li>
+<li><a href="#s2">How to build this thing?</a></li>
+<li><a href="#s3">Background Introduction</a></li>
+<li><a href="#s4">Server-side action</a></li>
+<li><a href="#s5">Client-side action</a></li>
+<li><a href="#s6">Further Reading</a></li>
+</ul>
+</h6>
+
+<h3 id="s1">What's removed?</h3>
 <p>Some things were changed before i pushed to git. Like:</p>
 <ul>
 <li>URLs: The urls that were used to the actual app are diferent than the ones this code uses. I truly advise you to go through the code, you will notice some dumb names. Just replace them with your urls, but don't change the name of the PHP files. Remember That!</li>
@@ -10,13 +22,13 @@
 <p>Although is sample data, is still works like the actual app, just make sure you got the urls right, and you <b>must set a localStorage key, so open up your devTools and go to the cookies/localStorage/sessionStorage menu and set <em>token</em> to <em>088038</em>, like <code>token : 088038</code></b>. Otherwise it won't work.
 This token is a pre-default one, it is already validated and ready to use. You can check for tokens in the <code>secrets.xml</code> file, <b>don't get confused, it is the <code>secrets.xml</code> file</b>.
 </p>
-<h3>How to build this thing?</h3>
+<h3 id="s2">How to build this thing?</h3>
 <p>Before you move to the next section, you probably are wondering how to see this in action. And that's what this section is all about. </p>
 <p>So, in this repo is the code for the server and for the app itself, the client. In order to use it properly, you have to upload the server code into your server, and change the urls in the <code>client-side/www/app.js</code> file. Just replace the weird names. Be carefull, <b>do not replace the PHP names</b> because the app is already coded to fetch those PHP files.</p>
 <p>For the client-side, you have two options: You can choose to build the app, or to run it from your browser.If you want to run from your browser just follow this instructions: If you head-up to the <code>client-side</code> folder, you will see another folder called <code>www</code>. In that folder rests the code for the client-side part of this application. Open up <code>index.html</code> on your browser and you are ready to go, just remenber to replace the urls in the <code>app.js</code> file.</p>
 <p>If you want to build the app, open up your node CLI, and make sure that you have Apache Cordova installed globally. If you already have cordova installed, <code>cd</code> to the client-side app and run <code>cordova build</code>. This will build you a debug app. If you want to build a release app, you <b>must have your keystore and your build config, i do not provide this files, for obvious reasons, just make yours</b>. After you have that configured, just run on the CLI <code>cordova build release</code>. This will load up the build config, and build an app in release mode</p>
 
-<h3>Background introduction</h3>
+<h3 id="s3">Background introduction</h3>
 
 <p>So, i am currently attending a course, and instituition where i attend as a poor website, it's is a messy, ugly and unpratical website, and lacks responsive design as is not adaptable to mobile devices. So, i tought to myself <em>There's gotta be a way to get data out of this website</em> and it was. After a few minutes, i was able to find a data entry point, a small detail that was left unprotected on the website, a sort of REST API with data about the scheduling of the course. With that REST API, i was able to see the schedule for all courses undergoing, and get the full schedule of all courses <em>Like everything, every single class that was schedule on that course</em>. I was also able to see the classrooms, the hours of the classes, and the amount of classes that we would have for each discipline.</p>
 
@@ -25,7 +37,7 @@ This token is a pre-default one, it is already validated and ready to use. You c
 <p><b>I'm not going to put any linking to the exploit, as i wan't it to leave it "untouchable". Just for privacy reasons.</b></p>
 
 
-<h3>Server-side action</h3>
+<h3 id="s4" >Server-side action</h3>
 <p>After i was able to deal with all the data, i wans't going to link the app directly to the exploit. So, i've built also some server (you can think as proxy server) that makes the brigde between the app and the exploit. Also, i've protected the app from being distributed outside my classmates by making authorization codes that only me can give. With this codes, i'm able to control the app usage, because every code has access permitions, i can revoke those permitions, making the app completly unusable (i will talk about this permission system later).<br>
 Because the lack of a good database server, i did all of the server-side code with XML, reading and editing XML files with PHP.</p>
 
@@ -42,13 +54,13 @@ Because the lack of a good database server, i did all of the server-side code wi
 <p>The last attribute that i want to mention is the <em>expiry</em>. This attribute was to define the lifecycle of the app, making it unusable after the date as expired. It's one of the many things i didn't implemented, because i actually didn't need that yet.</p>
 
 
-<h3> Client-side App action</h3>
+<h3 id="s5"> Client-side App action</h3>
 <p>The app is built with Apache Cordova, on android-23(Android 6.0). Is just a packed version of HTML5, CSS and alot of javascript. I did found some issues while coding the design of the app, because of the browser where the app was packed in. In summary, Apache Cordova packs the app in a Webkit Webview, but the webviews version vary on each operative system version. Some of the phones where i tested were able to render CSS3 properties like viewport measures, animations and woff webfonts, and some of the phones where i tested didn't recognize viewport measures, woff webfonts and animations. Specifically for older browsers, i had to make fallback options, like using percentage meauseres, and removing animations, while keeping the design seamless for older and new browsers. This proven to be a challenging thing to do,has i had no ideia that this would happen, and attracted my attention to cross-browser compatibility, and why i should worry about making my website or app accessible to difrent browsers in difrent platforms.</p>
 
 <p>The app runs on javascript to make requests to the proxy-server, and the proxy-server returns JSON data. The returned JSON data is then placed and formatted into the UI, like i did designed beforehand. This formatting included alot of chopping and splitting values (i problably could done all of this with a RegExp, but i just found more easier using array and string methods.</p>
 
 
-<h3>Further reading</h3>
+<h3 id="s6">Further reading</h3>
 <p>I mentioned alot of stuff in this readme, and as always i like to write a further reading section with links or articles that i found usefull and of course some references to documentation and platforms.<p>
 <h5>
 <ul>
